@@ -23,7 +23,7 @@ import (
 	"github.com/pions/webrtc/pkg/ice"
 )
 
-const usage = `Usage: ssh-p2p SUBCMD [options]
+const usage = `Usage: p2p-tunnel SUBCMD [options]
 sub-commands:
 	newkey
 		new generate key of connection

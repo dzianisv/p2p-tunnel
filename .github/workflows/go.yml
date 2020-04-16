@@ -39,10 +39,10 @@ jobs:
         # Artifact name
         name: Linux-armv7.zip
         # Directory containing files to upload
-        path: Linux-armv7.zip
+        path: ssh-p2p
         
     - name: Build
-      run: go build -v . && zip -9 Linux-amd64.zip ssh-p2p
+      run: go build -v .
     
     - name: Upload artifact
       uses: actions/upload-artifact@v1.0.0
@@ -50,5 +50,5 @@ jobs:
         # Artifact name
         name: Linux-amd64.zip
         # Directory containing files to upload
-        path: Linux-amd64.zip
+        path: ssh-p2p
       

@@ -1,0 +1,17 @@
+[Unit]
+Description=Peer-to-Peer tunneling for %I
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+PrivateTmp=true
+EnvironmentFile=/etc/p2p-tunnel/%I
+ExecStart=/usr/bin/p2p-tunnel $ARGS
+CapabilityBoundingSet=
+LimitNPROC=10
+ProtectSystem=strict
+ProtectHome=true
+KillMode=process
+
+[Install]
+WantedBy=multi-user.target

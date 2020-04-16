@@ -1,0 +1,54 @@
+name: Go
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+jobs:
+
+  build:
+    name: Build
+    runs-on: ubuntu-latest
+    steps:
+
+    - name: Set up Go 1.13
+      uses: actions/setup-go@v1
+      with:
+        go-version: 1.13
+      id: go
+
+    - name: Check out code into the Go module directory
+      uses: actions/checkout@v2
+
+    - name: Get dependencies
+      run: |
+        go get -v -t -d ./...
+        if [ -f Gopkg.toml ]; then
+            curl https://raw.githubusercontent.com/golang/dep/master/install.sh | sh
+            dep ensure
+        fi
+
+    - name: Build
+      run: GOARCH=arm GOARM=7 go build -v . && zip -9 Linux-armv7.zip ssh-p2p
+    
+    - name: Upload artifact
+      uses: actions/upload-artifact@v1.0.0
+      with:
+        # Artifact name
+        name: Linux-armv7.zip
+        # Directory containing files to upload
+        path: Linux-armv7.zip
+        
+    - name: Build
+      run: go build -v . && zip -9 Linux-amd64.zip ssh-p2p
+    
+    - name: Upload artifact
+      uses: actions/upload-artifact@v1.0.0
+      with:
+        # Artifact name
+        name: Linux-amd64.zip
+        # Directory containing files to upload
+        path: Linux-amd64.zip
+      

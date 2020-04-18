@@ -61,5 +61,5 @@ jobs:
         path: ${{env.NAME}}${{matrix.platform.ext}}
 
     - name: Build Linux packages
-      if: env.GOARCH == 'linux'
+      if: env.GOOS == 'linux'
       run: package/linux/make-pkg.sh

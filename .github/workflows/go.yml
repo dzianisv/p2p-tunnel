@@ -59,3 +59,7 @@ jobs:
         name: ${{env.NAME}}-${{env.GOOS}}-${{env.GOARCH}}.zip
         # Directory containing files to upload
         path: ${{env.NAME}}${{matrix.platform.ext}}
+
+    - name: Build Linux packages
+      if: env.GOARCH == "linux"
+      run: package/linux/make-pkg.sh

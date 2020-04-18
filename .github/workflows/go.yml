@@ -24,8 +24,8 @@ jobs:
 
     runs-on: ubuntu-latest
     env:
-      GOARCH: ${{matrix.arch}}
-      GOSO: ${{matrix.os}}
+      GOARCH: ${{matrix.platform.arch}}
+      GOSO: ${{matrix.platform.os}}
       NAME: p2p-tunnel
     steps:
     - name: Set up Go 1.13

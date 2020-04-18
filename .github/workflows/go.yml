@@ -64,5 +64,6 @@ jobs:
       if: env.GOOS == 'linux'
       run: |
         git fetch --tags
-        apt install -yq gem rpm
+        sudo apt install -yq gem rpm
+        sudo gem install fpm
         package/linux/make-pkg.sh

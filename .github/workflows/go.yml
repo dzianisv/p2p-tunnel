@@ -14,24 +14,35 @@ jobs:
       matrix:
         platform:
           - os: linux
-            arch: amd64
-            ext: ""
+            arch: x86_64
+            goarch: amd64
+
           - os: linux
             arch: arm
-            ext: ""
+            goarch: arm
+            goarm: 5
+
+          - os: linux
+            arch: armhf
+            goarch: arm
+            goarm: 7
+
           - os: darwin
-            arch: amd64
-            ext: ""
+            arch: x86_64
+            goarch: amd64
+
           - os: windows
-            arch: amd64
+            goarch: amd64
+            arch: x86_64
             ext: .exe
 
     runs-on: ubuntu-latest
     env:
-      GOARCH: ${{matrix.platform.arch}}
       GOOS: ${{matrix.platform.os}}
-      NAME: p2p-tunnel
       ARCH: ${{matrix.platform.arch}}
+      GOARCH: ${{matrix.platform.goarch}}
+      GOARM: ${{matrix.platform.goarm}}
+      NAME: p2p-tunnel
     steps:
     - name: Set up Go 1.13
       uses: actions/setup-go@v1

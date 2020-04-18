@@ -2,7 +2,7 @@
 set -xe
 
 NAME=${NAME:-"p2p-tunnel"}
-VERSION=${VERSION:-$(git describe --tags)}
+VERSION=${VERSION:-$(git describe --tags --always)}
 ARCH=${ARCH:-$(dpkg --print-architecture)}
 DESCRIPTION=${DESCRIPTION:-"Peer-to-Peer tunneling"}
 INSTALL_DIR=${INSTALL_DIR:-.package}

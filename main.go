@@ -140,7 +140,7 @@ func main() {
 		os.Exit(0)
 	case "server":
 		var addr, key string
-		flags.StringVar(&addr, "dial", "127.0.0.1:22", "dial addr = host:port")
+		flags.StringVar(&addr, "adr", "127.0.0.1:22", "dial addr = host:port")
 		flags.StringVar(&key, "key", "sample", "connection key")
 		if err := flags.Parse(os.Args[2:]); err != nil {
 			log.Fatalln(err)
@@ -153,7 +153,7 @@ func main() {
 		cancel()
 	case "client":
 		var addr, key string
-		flags.StringVar(&addr, "listen", "127.0.0.1:2222", "listen addr = host:port")
+		flags.StringVar(&addr, "addr", "127.0.0.1:2222", "listen addr = host:port")
 		flags.StringVar(&key, "key", "sample", "connection key")
 		if err := flags.Parse(os.Args[2:]); err != nil {
 			log.Fatalln(err)

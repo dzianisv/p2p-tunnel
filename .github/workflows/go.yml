@@ -10,9 +10,24 @@ jobs:
 
   build:
     name: Build
-    runs-on: ubuntu-latest
-    steps:
+    strategy:
+      matrix:
+        platform:
+          - os: linux
+            arch: amd64
+          - os: linux
+            arch: arm
+          - os: darwin
+            arch: amd64
+          - os: windows
+            arch: amd64
 
+    runs-on: ubuntu-latest
+    env:
+      GOARCH: ${{matrix.arch}}
+      GOSO: ${{matrix.os}}
+      NAME: p2p-tunnel
+    steps:
     - name: Set up Go 1.13
       uses: actions/setup-go@v1
       with:
@@ -31,24 +46,12 @@ jobs:
         fi
 
     - name: Build
-      run: GOARCH=arm GOARM=7 go build -v . && zip -9 Linux-armv7.zip ssh-p2p
-    
-    - name: Upload artifact
-      uses: actions/upload-artifact@v1.0.0
-      with:
-        # Artifact name
-        name: Linux-armv7.zip
-        # Directory containing files to upload
-        path: ssh-p2p
-        
-    - name: Build
       run: go build -v .
-    
+
     - name: Upload artifact
       uses: actions/upload-artifact@v1.0.0
       with:
         # Artifact name
-        name: Linux-amd64.zip
+        name: ${{env.NAME}}-${{env.GOOS}}-${{env.GOARCH}}.zip
         # Directory containing files to upload
-        path: ssh-p2p
-      
+        path: ${{env.NAME}}

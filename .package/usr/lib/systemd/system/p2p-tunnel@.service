@@ -4,14 +4,12 @@ After=network-online.target
 Wants=network-online.target
 
 [Service]
-PrivateTmp=true
 EnvironmentFile=/etc/p2p-tunnel/%I
-ExecStart=/usr/bin/p2p-tunnel $ARGS
+ExecStart=/usr/bin/p2p-tunnel ${MODE} -key ${KEY} -addr ${ADDRESS}
 CapabilityBoundingSet=
-LimitNPROC=10
 ProtectSystem=strict
 ProtectHome=true
-KillMode=process
+PrivateTmp=true
 
 [Install]
 WantedBy=multi-user.target

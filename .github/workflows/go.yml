@@ -62,4 +62,7 @@ jobs:
 
     - name: Build Linux packages
       if: env.GOOS == 'linux'
-      run: package/linux/make-pkg.sh
+      run: |
+        git fetch --tags
+        apt install -yq gem rpm
+        package/linux/make-pkg.sh

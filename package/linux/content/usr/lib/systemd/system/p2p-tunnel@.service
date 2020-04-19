@@ -6,7 +6,7 @@ Wants=network-online.target
 [Service]
 EnvironmentFile=/etc/p2p-tunnel/%I
 ExecStart=/usr/bin/p2p-tunnel ${MODE} -key ${KEY} -addr ${ADDRESS}
-CapabilityBoundingSet=
+CapabilityBoundingSet=cap_net_bind_service
 ProtectSystem=strict
 ProtectHome=true
 PrivateTmp=true

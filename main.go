@@ -27,10 +27,10 @@ const usage = `Usage: p2p-tunnel SUBCMD [options]
 sub-commands:
 	newkey
 		new generate key of connection
-	server -key="..." [-dial="127.0.0.1:22"]
-		ssh server side peer mode
-	client -key="..." [-listen="127.0.0.1:2222"]
-		ssh client side peer mode
+	server -key="..." [-addr="127.0.0.1:22"]
+		server side peer mode
+	client -key="..." [-addr="127.0.0.1:2222"]
+		client side peer mode
 `
 
 var (
@@ -140,7 +140,7 @@ func main() {
 		os.Exit(0)
 	case "server":
 		var addr, key string
-		flags.StringVar(&addr, "adr", "127.0.0.1:22", "dial addr = host:port")
+		flags.StringVar(&addr, "addr", "127.0.0.1:22", "dial addr = host:port")
 		flags.StringVar(&key, "key", "sample", "connection key")
 		if err := flags.Parse(os.Args[2:]); err != nil {
 			log.Fatalln(err)

@@ -55,7 +55,7 @@ jobs:
 
     - name: Fetch tags
       run: |
-        git fetch --tags
+        git fetch --prune --unshallow
         echo "::set-env name=GIT_TAG::$(git describe --tags --always)"
 
     - name: Get dependencies
